@@ -1,6 +1,6 @@
 // MEU-APP-CHAMADOS-BACKEND/src/server.js
 require('dotenv').config();
-const path = require('path'); // <-- ADICIONADO
+const path = require('path');
 
 const express = require('express');
 const cors = require('cors');
@@ -30,13 +30,16 @@ const servicosRoutes = require('./routes/servicos.routes');
 const app = express();
 const server = http.createServer(app);
 
+// --- LISTA DE ORIGENS ATUALIZADA ---
 const allowedOrigins = [
   'https://app.laink.com.br',
   'https://www.app.laink.com.br',
   'https://api.laink.com.br',
   'https://www.api.laink.com.br',
   'http://localhost:5173',
-  'http://localhost:3333'
+  'http://localhost:3333',
+  'https://free.laink.com.br',      // <-- CORREÇÃO
+  'https://www.free.laink.com.br'   // <-- CORREÇÃO
 ];
 
 const corsOptions = {
@@ -61,9 +64,6 @@ const io = new Server(server, {
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// --- LINHA ADICIONADA PARA SERVIR ARQUIVOS ESTÁTICOS ---
-// O primeiro argumento '/uploads' é a URL que o frontend vai usar.
-// O segundo argumento aponta para a pasta física no seu servidor.
 app.use('/uploads', express.static(path.join(__dirname, '..', 'tmp', 'uploads')));
 
 app.use((request, response, next) => {
@@ -121,4 +121,3 @@ const PORT = process.env.PORT || 3333;
 server.listen(PORT, () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
-// para forçar o deploy
