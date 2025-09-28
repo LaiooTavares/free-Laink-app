@@ -1,0 +1,22 @@
+### Cadastrar um novo usuário
+POST http://localhost:3333/users
+Content-Type: application/json
+
+{
+  "name": "João Silva",
+  "email": "tecnico@laink.com",
+  "password": "123",
+  "role": "TECNICO"
+}
+
+### Fazer login (criar sessão)
+POST http://localhost:3333/sessions
+Content-Type: application/json
+
+{
+  "email": "tecnico@laink.com",
+  "password": "123"
+}
+### Listar todos os chamados
+GET http://localhost:3333/chamados
+

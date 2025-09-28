@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  laink-app-backend: # Nome do serviço no EasyPanel
+    build: . # Pede para o Docker construir a imagem a partir do Dockerfile na pasta atual
+    restart: always
+    labels:
+      # Habilita o Traefik para este serviço
+      - "traefik.enable=true"
+
+      # --- Rota para o seu backend ---
+      # IMPORTANTE: Ajuste a regra 'Host' para o domínio que aponta para o seu backend
+      - "traefik.http.routers.laink-backend-ws.rule=Host(`api.seu-dominio.com`)" 
+      - "traefik.http.routers.laink-backend-ws.entrypoints=websecure"
+      - "traefik.http.routers.laink-backend-ws.tls.certresolver=myresolver"
+
+      # --- Porta interna do seu backend ---
+      # IMPORTANTE: Substitua '5000' pela porta em que sua aplicação backend escuta
+      - "traefik.http.services.laink-backend-ws.loadbalancer.server.port=5000"
+
+      # --- CONFIGURAÇÃO ESSENCIAL PARA WEBSOCKETS ---
+      # Copie esta parte exatamente como está
+      - "traefik.http.middlewares.laink-ws-upgrade.headers.customrequestheaders.Connection=Upgrade"
+      - "traefik.http.middlewares.laink-ws-upgrade.headers.customrequestheaders.Upgrade=websocket"
+
+      # Aplica o middleware de WebSocket ao roteador do seu backend
+      - "traefik.http.routers.laink-backend-ws.middlewares=laink-ws-upgrade"
+
+networks:
+  default:
+    external:
+      name: easypanel

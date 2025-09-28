@@ -1,0 +1,25 @@
+// Este é o seu arquivo de schema do Prisma.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- SEU MODELO DE USUÁRIO VAI AQUI ---
+// Ajuste os campos abaixo para corresponderem exatamente
+// à estrutura que sua aplicação espera.
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?  // O "?" significa que este campo é opcional
+
+  // Adicione aqui quaisquer outros campos que seu modelo de usuário tenha...
+  // Exemplo: createdAt DateTime @default(now())
+}
+
+// Adicione aqui seus outros modelos (tabelas), se tiver...
