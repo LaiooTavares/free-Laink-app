@@ -29,14 +29,16 @@ const servicosRoutes = require('./routes/servicos.routes');
 
 const app = express();
 const server = http.createServer(app);
-
+// CÓDIGO MODIFICADO
 const allowedOrigins = [
   'https://app.laink.com.br',
   'https://www.app.laink.com.br',
   'https://api.laink.com.br',
   'https://www.api.laink.com.br',
   'http://localhost:5173',
-  'http://localhost:3333'
+  'http://localhost:3333',
+  'https://free.laink.com.br',         // <-- ADICIONE ESTA LINHA
+  'https://www.free.laink.com.br'      // <-- ADICIONE ESTA TAMBÉM
 ];
 
 const corsOptions = {
