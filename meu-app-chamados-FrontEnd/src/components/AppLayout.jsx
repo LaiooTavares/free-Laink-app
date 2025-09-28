@@ -103,14 +103,16 @@ const menuOperador = [
     { text: 'Check in/out', icon: <AccessTimeIcon />, path: '/ponto' },
     { text: 'Configurações', icon: <SettingsOutlinedIcon />, path: '/configuracoes' },
 ];
+
+// --- ORDEM DO MENU DO GESTOR ATUALIZADA ---
 const menuGestor = [ 
   { text: 'Dashboard Gestor', icon: <QueryStatsIcon />, path: '/gestor/dashboard' },
   { text: 'Usuários', icon: <GroupIcon />, path: '/gestor/usuarios' },
   { text: 'Clientes', icon: <BusinessIcon />, path: '/gestor/clientes' },
+  { text: 'Ajustes', icon: <TuneIcon />, path: '/gestor/ajustes' }, // <-- MOVIDO PARA CIMA
   { text: 'Inserir Aviso', icon: <CampaignIcon />, disabled: true, tooltip: upgradeTooltip },
   { text: 'Registros', icon: <ArticleIcon />, disabled: true, tooltip: upgradeTooltip },
   { text: 'Tempo', icon: <TimerIcon />, disabled: true, tooltip: upgradeTooltip },
-  { text: 'Ajustes', icon: <TuneIcon />, path: '/gestor/ajustes' }
 ];
 
 const getMenuItems = (role) => {
@@ -313,11 +315,9 @@ export default function AppLayout({ children, onLogout, userRole }) {
           </Toolbar>
         </AppBar>
         <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
-          {/* --- DRAWER MÓVEL CORRIGIDO --- */}
           <Drawer variant="temporary" open={mobileOpen} onClose={handleDrawerToggle} ModalProps={{ keepMounted: true }} sx={{ display: { xs: 'block', sm: 'none' }, '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, border: 'none', bgcolor: 'background.paper' }, }}>
             {drawerContent}
           </Drawer>
-          {/* --- DRAWER DESKTOP CORRIGIDO --- */}
           <Drawer 
             variant="permanent" 
             sx={{ 
@@ -326,7 +326,7 @@ export default function AppLayout({ children, onLogout, userRole }) {
                 boxSizing: 'border-box', 
                 width: drawerWidth, 
                 border: 'none',
-                bgcolor: 'background.paper' // Alterado de 'transparent' para a cor padrão
+                bgcolor: 'background.paper'
               }, 
             }} 
             open
