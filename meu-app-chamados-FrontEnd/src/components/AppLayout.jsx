@@ -104,12 +104,11 @@ const menuOperador = [
     { text: 'Configurações', icon: <SettingsOutlinedIcon />, path: '/configuracoes' },
 ];
 
-// --- ORDEM DO MENU DO GESTOR ATUALIZADA ---
 const menuGestor = [ 
   { text: 'Dashboard Gestor', icon: <QueryStatsIcon />, path: '/gestor/dashboard' },
   { text: 'Usuários', icon: <GroupIcon />, path: '/gestor/usuarios' },
   { text: 'Clientes', icon: <BusinessIcon />, path: '/gestor/clientes' },
-  { text: 'Ajustes', icon: <TuneIcon />, path: '/gestor/ajustes' }, // <-- MOVIDO PARA CIMA
+  { text: 'Ajustes', icon: <TuneIcon />, path: '/gestor/ajustes' },
   { text: 'Inserir Aviso', icon: <CampaignIcon />, disabled: true, tooltip: upgradeTooltip },
   { text: 'Registros', icon: <ArticleIcon />, disabled: true, tooltip: upgradeTooltip },
   { text: 'Tempo', icon: <TimerIcon />, disabled: true, tooltip: upgradeTooltip },
@@ -249,10 +248,13 @@ export default function AppLayout({ children, onLogout, userRole }) {
         })}
       </List>
       <Box sx={{ flexGrow: 1 }} />
+      {/* --- ALTERAÇÃO AQUI --- */}
       <Box sx={{ p: 2, textAlign: 'center' }}>
-        <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 'bold' }}>
-          Laink-OS V1.0.0 free
-        </Typography>
+        <Tooltip title="laiotavares.souza@gmail.com" placement="top">
+          <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 'bold', cursor: 'pointer' }}>
+            Laink-OS V1.0.0 free
+          </Typography>
+        </Tooltip>
       </Box>
       <Divider sx={{ mx: 2 }} />
       <List sx={{ p: 2 }}>
